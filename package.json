@@ -28,5 +28,8 @@
         "morgan": "^1.10.0",
         "rotating-file-stream": "^3.0.4",
         "swagger-ui-express": "^4.4.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.16"
     }
 }
