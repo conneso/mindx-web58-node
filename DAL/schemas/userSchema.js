@@ -1,6 +1,5 @@
-const userDAL = require('./userDAL');
-
-const UserSchema = new userDAL.Schema({
+const mongoose = require('mongoose')
+const UserSchema = new mongoose.Schema({
     createdAt: Date,
     phone: String,
     avartar: String,
@@ -16,5 +15,4 @@ const UserSchema = new userDAL.Schema({
     id: Number,
     status: String
 })
-
 module.exports = UserSchema

@@ -4,8 +4,17 @@ const path = require('path')
 const rfs = require('rotating-file-stream')
 const port = 3000
 
+const database = require('./DAL/database')
+const mindx_web58 = new database()
 
-const UserModel = require('./DAL/userModel')
+const UserModel = require('./DAL/models/userModel')
+userModel = new UserModel()
+
+const ArtistModel = require('./DAL/models/artistModel')
+artistModel = new ArtistModel()
+
+const ArtworkModel = require('./DAL/models/artworkModel')
+artworkModel = new ArtworkModel();
 
 var app = express()
 
@@ -22,83 +31,59 @@ var accessLogStream = rfs.createStream('user-api-access.log', {
 app.use(morgan('common', { stream: accessLogStream }))
 
 //khai bao routing
+app.use('/', (err, req, res, next) => {
+    if (err) throw err
+    next()
+})
 app.get('/users', (req, res) => {
-    UserModel.find()
-        .skip(req.query.skip ? req.query.skip : 0)
-        .limit(req.query.limit ? req.query.limit : 10)
-        .sort('-createdAt')
-        .then(data => {
-            res.json({ length: data.length, data: data })
-        })
+    userModel.getAll(req.query.skip, req.query.limit, req.query.orderBy).then(data => {
+        res.json({ length: data.length, data: data })
+    })
 })
 
 app.get('/users/findByName', async(req, res) => {
     var filter = req.query.filter
-    var $regex = new RegExp(`${filter}`)
-    const query = UserModel.find({ 'name.first': $regex })
-        .or({ 'name.last': $regex })
-        .or({ fullname: $regex })
-        .or({ 'book.title': $regex });
-    query.exec(function(err, data) {
-        if (err) throw err;
+    userModel.findByName(filter).then((err, data) => {
         res.json({ length: data.length, data: data })
-    });
-    // UserModel.find({ 'name.first': first }).or({ 'name.last': last }).then(data => {
-    //     res.json({ length: data.length, data: data })
-    // }).catch(err => {
-    //     throw err
-    // })
+    })
 })
 
 app.post('/users', async(req, res) => {
     var reqUser = req.body.user;
-    var currentUser = await UserModel.findOne({ _id: reqUser._id });
-    if (currentUser && currentUser != null) {
-        currentUser.fullname = reqUser.fullname;
-        currentUser.name = reqUser.name;
-        currentUser.status = reqUser.status;
-        //await currentUser.save();
-        UserModel.updateOne({ _id: reqUser._id }, { $set: { fullname: reqUser.fullname, name: reqUser.name, status: reqUser.status } })
-            .then(data => {
-                res.json({ status: true, message: 'Sucessfully!', data: data });
-            }).catch(err => {
-                throw err
-            });
-
-    } else {
-        res.send('User does not exist!')
-    }
+    var result = await userModel.updateById(reqUser._id, reqUser)
+    if (result) res.json({ status: true, message: 'Sucessfully!', data: result });
+    else res.json({ status: false, message: 'Something went wrong!', data: result });
 })
 
 app.put('/users', (req, res) => {
     var reqUser = req.body.user;
-    if (reqUser.id == null || reqUser.id == undefined) reqUser.id = getRandomInt(10, 1000000);
-    var newModel = new UserModel({
-        fullname: reqUser.fullname,
-        name: {
-            first: reqUser.name.first,
-            last: reqUser.name.last
-        },
-        book: reqUser.book,
-        createdAt: new Date(),
-        phone: reqUser.phone,
-        avartar: null,
-        id: reqUser.id,
-        status: 'A'
-    });
-    newModel.save().then(data => {
+    userModel.insertNew(reqUser).then(data => {
         res.json(data)
-    }).catch(err => {
-        throw err;
     })
 })
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+//#region Artists
+app.get('/artists', (req, res) => {
+    artistModel.getAll(req.query.skip, req.query.limit, req.query.orderBy).then(data => {
+        res.json({ length: data.length, data: data })
+    })
+})
+
+app.get('/artists/aggregate', async(req, res) => {
+    var data = await artistModel.aggregate();
+    res.json({ length: data.length, data: data });
+})
+app.get('/artworks/aggregate', async(req, res) => {
+        var data = await artworkModel.aggregate();
+        res.json({ length: data.length, data: data });
+    })
+    //#endregion
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`);
+
+    mindx_web58.connect().then((err, result) => {
+        if (err) throw err
+        console.log('connect to mongodb is successfully')
+    })
 })
