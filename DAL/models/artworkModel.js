@@ -22,6 +22,12 @@ class ArtworkModel extends BaseModel {
         var result = await this.model.aggregate(agg);
         return result
     }
+
+    findByTitle = function(filter) {
+        var $regex = new RegExp(filter)
+        var query = this.model.find({}).where({ 'title': $regex });
+        return query.exec();
+    }
 }
 
 module.exports = ArtworkModel

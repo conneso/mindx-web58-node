@@ -5,6 +5,8 @@ const ArtistSchema = new mongoose.Schema({
     first_name: String,
     year_born: Number,
     year_died: Number,
+    nationality: String,
+    updatedDate: Date,
     work: ArtworkSchema
 })
 

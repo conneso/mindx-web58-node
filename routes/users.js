@@ -1,31 +1,35 @@
 const express = require('express');
-const mymongoose = require('../DAL/mongoose');
-let users = [];
-const userSchema = new mymongoose.Schema({
-    createdDate: Date,
-    phone: String,
-    avartar: String,
-    fullname: String,
-    id: Number,
-    status: String
+const router = express.Router()
+
+const UserModel = require('../DAL/models/userModel')
+const userModel = new UserModel()
+
+
+router.get('/', (req, res) => {
+    userModel.getAll(req.query.skip, req.query.limit, req.query.orderBy).then(data => {
+        res.json({ length: data.length, data: data })
+    })
 })
 
-const userModel = mymongoose.model('users', userSchema)
+router.get('/findByName', async(req, res) => {
+    var filter = req.query.filter
+    userModel.findByName(filter).then((err, data) => {
+        res.json({ length: data.length, data: data })
+    })
+})
 
-// define the home page route
-exports.list = (req, res, next) => {
-    users = userModel.find();
-    req.users = users;
-}
+router.post('/', async(req, res) => {
+    var reqUser = req.body.user;
+    var result = await userModel.updateById(reqUser._id, reqUser)
+    if (result) res.json({ status: true, message: 'Sucessfully!', data: result });
+    else res.json({ status: false, message: 'Something went wrong!', data: result });
+})
 
-exports.load = function(req, res, next) {
-    var id = req.params.id;
-    req.user = users[id];
-    if (req.user) {
-        next();
-    } else {
-        var err = new Error('cannot find user ' + id);
-        err.status = 404;
-        next(err);
-    }
-};
+router.put('/', (req, res) => {
+    var reqUser = req.body.user;
+    userModel.insertNew(reqUser).then(data => {
+        res.json(data)
+    })
+})
+
+module.exports = router
