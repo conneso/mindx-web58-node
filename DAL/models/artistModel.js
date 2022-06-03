@@ -37,7 +37,7 @@ class ArtistModel extends BaseModel {
         return query.exec();
     }
 
-    updateById = async function(id) {
+    updateDateById = async function(id) {
         var currentArtist = await this.model.findOne({ '_id': id });
         if (currentArtist && currentArtist != null) {
             // currentArtist.updatedDate = new Date();
