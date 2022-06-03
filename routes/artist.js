@@ -16,13 +16,19 @@ router.get('/findByName', (req, res) => {
     })
 })
 
-router.post('/updateById', async(req, res) => {
+router.post('/updateDateById', async(req, res) => {
     var id = req.body.id;
-    var result = await artistModel.updateById(id)
+    var result = await artistModel.updateDateById(id)
     if (result) res.send('sucessfully')
     else res.send('something went wrong')
 })
 
+router.put('/addNewArtist', (req, res) => {
+    var artist = req.body.artist;
+    artistModel.addNewArtist(artist).then(data => {
+        res.json(data)
+    });
+})
 router.get('/aggregate', async(req, res) => {
     var data = await artistModel.aggregate();
     res.json({ length: data.length, data: data });

@@ -39,7 +39,7 @@ app.use('/api/users', userRouter)
     //     swaggerUi.serve,
     //     swaggerUi.setup(swaggerDocument)
     // );
-require('./swagger-setup')(app);
+    // require('./swagger-setup')(app);
 const database = require('./DAL/database')
 const mindx_web58 = new database()
 

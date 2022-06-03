@@ -51,3 +51,6 @@
 ::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
 ::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 304 -
 ::1 - - [03/Jun/2022:03:10:05 +0000] "GET /docs/favicon-32x32.png HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:13:23:58 +0000] "PUT /api/artists/addNewArtist HTTP/1.1" 200 22
+::1 - - [03/Jun/2022:13:24:36 +0000] "PUT /api/artists/addNewArtist HTTP/1.1" 200 22
+::1 - - [03/Jun/2022:13:25:46 +0000] "PUT /api/artists/addNewArtist HTTP/1.1" 200 114

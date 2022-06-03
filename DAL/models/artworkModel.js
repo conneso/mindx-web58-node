@@ -28,6 +28,10 @@ class ArtworkModel extends BaseModel {
         var query = this.model.find({}).where({ 'title': $regex });
         return query.exec();
     }
+
+    addNewArtwork = async function(newArtwork) {
+        this.model.update(newArtwork, newArtwork, { upsert: true })
+    }
 }
 
 module.exports = ArtworkModel
