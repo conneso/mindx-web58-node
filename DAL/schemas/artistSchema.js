@@ -7,7 +7,7 @@ const ArtistSchema = new mongoose.Schema({
     year_died: Number,
     nationality: String,
     updatedDate: Date,
-    work: ArtworkSchema
+    works: Array.of(ArtworkSchema)
 })
 
 module.exports = ArtistSchema

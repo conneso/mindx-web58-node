@@ -1,5 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
 const path = require('path')
 const rfs = require('rotating-file-stream')
 const port = 3000
@@ -27,11 +29,14 @@ const artistRouter = require('./routes/artist')
 const artworkRouter = require('./routes/artwork')
 const userRouter = require('./routes/users')
 
-app.use('/artists', artistRouter)
-app.use('/artworks', artworkRouter)
-app.use('/users', userRouter)
+app.use('/api/artists', artistRouter)
+app.use('/api/artworks', artworkRouter)
+app.use('/api/users', userRouter)
     //#endregion
-
+app.use('/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument)
+);
 const database = require('./DAL/database')
 const mindx_web58 = new database()
 

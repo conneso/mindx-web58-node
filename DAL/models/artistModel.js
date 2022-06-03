@@ -12,12 +12,7 @@ class ArtistModel extends BaseModel {
                 'from': 'artwork',
                 'localField': '_id',
                 'foreignField': 'artistId',
-                'as': 'work'
-            }
-        }, {
-            '$unwind': {
-                'path': '$work',
-                'preserveNullAndEmptyArrays': true
+                'as': 'works'
             }
         }]
         var result = await this.model.aggregate(agg)
@@ -49,6 +44,7 @@ class ArtistModel extends BaseModel {
             await this.model.updateOne({ _id: id }, { $set: { updatedDate: new Date() } })
             return true
         }
+
         return false
     }
 
