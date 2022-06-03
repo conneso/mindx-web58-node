@@ -39,3 +39,15 @@
 ::1 - - [02/Jun/2022:23:25:05 +0000] "GET /artists/aggregate HTTP/1.1" 200 2096
 ::1 - - [02/Jun/2022:23:31:41 +0000] "GET /api/artists/aggregate HTTP/1.1" 200 2096
 ::1 - - [02/Jun/2022:23:31:50 +0000] "GET /api/artists?skip=0&limit=5&orderBy=-year_born HTTP/1.1" 200 795
+::1 - - [03/Jun/2022:03:09:53 +0000] "GET /docs/ HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:09:53 +0000] "GET /docs/swagger-ui.css HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:09:53 +0000] "GET /docs/swagger-ui-bundle.js HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:09:53 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 200 1607
+::1 - - [03/Jun/2022:03:09:53 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:09:53 +0000] "GET /docs/favicon-32x32.png HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/ HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/swagger-ui.css HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/swagger-ui-bundle.js HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:10:04 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 304 -
+::1 - - [03/Jun/2022:03:10:05 +0000] "GET /docs/favicon-32x32.png HTTP/1.1" 304 -

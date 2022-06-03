@@ -1,10 +1,12 @@
 const express = require('express')
 const morgan = require('morgan')
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('./swagger.json')
+    // const swaggerUi = require('swagger-ui-express')
+    // const swaggerDocument = require('./swagger.json')
 const path = require('path')
 const rfs = require('rotating-file-stream')
-const port = 3000
+const config = require('./config/config.json')
+
+const port = config.port
 var app = express()
 
 //json formater
@@ -33,10 +35,11 @@ app.use('/api/artists', artistRouter)
 app.use('/api/artworks', artworkRouter)
 app.use('/api/users', userRouter)
     //#endregion
-app.use('/docs',
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerDocument)
-);
+    // app.use('/docs',
+    //     swaggerUi.serve,
+    //     swaggerUi.setup(swaggerDocument)
+    // );
+require('./swagger-setup')(app);
 const database = require('./DAL/database')
 const mindx_web58 = new database()
 
