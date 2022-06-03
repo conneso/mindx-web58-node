@@ -54,3 +54,17 @@
 ::1 - - [03/Jun/2022:13:23:58 +0000] "PUT /api/artists/addNewArtist HTTP/1.1" 200 22
 ::1 - - [03/Jun/2022:13:24:36 +0000] "PUT /api/artists/addNewArtist HTTP/1.1" 200 22
 ::1 - - [03/Jun/2022:13:25:46 +0000] "PUT /api/artists/addNewArtist HTTP/1.1" 200 114
+::1 - - [03/Jun/2022:13:46:03 +0000] "GET /api/artists/findByName?filter=a HTTP/1.1" 200 448
+::1 - - [03/Jun/2022:13:47:08 +0000] "GET /api/artworks/findByTitle?filter=llar HTTP/1.1" 200 343
+::1 - - [03/Jun/2022:13:47:37 +0000] "GET /api/artists/aggregate HTTP/1.1" 200 1607
+::1 - - [03/Jun/2022:13:48:08 +0000] "GET /api/artworks/aggregate HTTP/1.1" 200 677
+::1 - - [03/Jun/2022:14:10:13 +0000] "PUT /api/artworks/addNewArtwork HTTP/1.1" 200 334
+::1 - - [03/Jun/2022:14:11:52 +0000] "GET /api/artworks/aggregate HTTP/1.1" 200 677
+::1 - - [03/Jun/2022:14:16:55 +0000] "PUT /api/artworks/addNewArtwork HTTP/1.1" 200 334
+::1 - - [03/Jun/2022:14:17:40 +0000] "GET /api/artworks/aggregate HTTP/1.1" 200 1340
+::1 - - [03/Jun/2022:14:18:51 +0000] "GET /api/artworks/aggregate HTTP/1.1" 200 1654
+::1 - - [03/Jun/2022:14:27:18 +0000] "DELETE /api/artworks/deleteById?artworkId=l629a17d75c2b39373c77d732 HTTP/1.1" 200 38
+::1 - - [03/Jun/2022:14:28:13 +0000] "DELETE /api/artworks/deleteById?artworkId=l629a17d75c2b39373c77d732 HTTP/1.1" 200 38
+::1 - - [03/Jun/2022:14:28:51 +0000] "DELETE /api/artworks/deleteById?artworkId=l629a17d75c2b39373c77d732 HTTP/1.1" 200 38
+::1 - - [03/Jun/2022:14:32:28 +0000] "DELETE /api/artworks/deleteById?artworkId=629a17d75c2b39373c77d732 HTTP/1.1" 200 38
+::1 - - [03/Jun/2022:14:38:28 +0000] "POST /api/artworks/update HTTP/1.1" 200 92

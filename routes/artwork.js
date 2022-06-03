@@ -22,4 +22,22 @@ router.get('/findByTitle', (req, res) => {
     })
 })
 
+router.put('/addNewArtwork', (req, res) => {
+    artworkModel.addNew(req.body.artworks).then(data => {
+        res.send(data);
+    })
+})
+
+router.delete('/deleteById', (req, res) => {
+    var id = req.query.artworkId
+    artworkModel.delete(id).then(data => {
+        res.json(data)
+    })
+})
+
+router.post('/update', (req, res) => {
+    artworkModel.update(req.body.artwork).then(result => {
+        res.json(result);
+    })
+})
 module.exports = router

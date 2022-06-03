@@ -5,7 +5,7 @@ const ArtworkSchema = new mongoose.Schema({
     year: Number,
     price: Number,
     artist: ArtistSchema,
-    artistId: String,
+    artistId: mongoose.Types.ObjectId,
     tags: Array
 })
 

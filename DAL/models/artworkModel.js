@@ -29,8 +29,9 @@ class ArtworkModel extends BaseModel {
         return query.exec();
     }
 
-    addNewArtwork = async function(newArtwork) {
-        this.model.update(newArtwork, newArtwork, { upsert: true })
+    addNewArtwork = async function(newArtworks) {
+        // this.model.update(newArtwork, newArtwork, { upsert: true })
+        return this.model.create(newArtworks)
     }
 }
 
