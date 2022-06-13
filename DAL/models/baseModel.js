@@ -4,6 +4,10 @@ class BaseModel {
     constructor(name, schema) {
         this.model = mongoose.model(name, schema)
     }
+    count = function() {
+        var query = this.model.count({});
+        return query.exec();
+    }
     getAll = function(skip, limit, orderBy = '-createdAt') {
         var query = this.model.find({})
             .skip(skip ? skip : 0)
