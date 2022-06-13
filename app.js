@@ -5,7 +5,7 @@ const morgan = require('morgan')
 const path = require('path')
 const rfs = require('rotating-file-stream')
 const config = require('./config/config.json')
-
+const cors = require("cors");
 const port = config.port
 var app = express()
 
@@ -31,7 +31,7 @@ const artistRouter = require('./routes/artist')
 const artworkRouter = require('./routes/artwork')
 const userRouter = require('./routes/users')
 
-app.use('/api/artists', artistRouter)
+app.use('/api/artists', cors(), artistRouter)
 app.use('/api/artworks', artworkRouter)
 app.use('/api/users', userRouter)
     //#endregion
