@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-
+const authenticateToken = require('../common/authentication')
 const ArtistModel = require('../DAL/models/artistModel')
 const artistModel = new ArtistModel()
 
-router.get('/', (req, res) => {
+router.get('/', authenticateToken, (req, res) => {
     artistModel.getAll(req.query.skip, req.query.limit, req.query.orderBy).then(data => {
         res.json({ length: data.length, data: data })
     })

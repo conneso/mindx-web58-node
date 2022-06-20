@@ -11,6 +11,8 @@ const UserSchema = new mongoose.Schema({
         title: String,
         publishYear: Number
     },
+    username: String,
+    password: String,
     fullname: String,
     id: Number,
     status: String

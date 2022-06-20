@@ -4,21 +4,20 @@ const router = express.Router()
 const UserModel = require('../DAL/models/userModel')
 const userModel = new UserModel()
 
-
 router.get('/', (req, res) => {
     userModel.getAll(req.query.skip, req.query.limit, req.query.orderBy).then(data => {
         res.json({ length: data.length, data: data })
     })
 })
 
-router.get('/findByName', async(req, res) => {
+router.get('/findByName', async (req, res) => {
     var filter = req.query.filter
     userModel.findByName(filter).then((err, data) => {
         res.json({ length: data.length, data: data })
     })
 })
 
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     var reqUser = req.body.user;
     var result = await userModel.updateById(reqUser._id, reqUser)
     if (result) res.json({ status: true, message: 'Sucessfully!', data: result });
@@ -31,5 +30,17 @@ router.put('/', (req, res) => {
         res.json(data)
     })
 })
+
+router.post('/signin', (req, res) => {
+    userModel.findByUsernameAndPassword(req.body.username, req.body.password).then(data => {
+        if (data.length > 0) {
+            let token = userModel.generateAccessToken({ username: req.body.username })
+            res.json({ existed: true, token: token })
+        } else {
+            res.json({ existed: false, token: "" })
+        }
+    })
+
+});
 
 module.exports = router
