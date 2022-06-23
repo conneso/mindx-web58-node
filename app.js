@@ -32,8 +32,8 @@ const artworkRouter = require('./routes/artwork')
 const userRouter = require('./routes/users')
 
 app.use('/api/artists', cors(), artistRouter)
-app.use('/api/artworks', artworkRouter)
-app.use('/api/users', userRouter)
+app.use('/api/artworks', cors(), artworkRouter)
+app.use('/api/users', cors(), userRouter)
     //#endregion
     // app.use('/docs',
     //     swaggerUi.serve,
