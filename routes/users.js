@@ -32,7 +32,8 @@ router.put('/', (req, res) => {
 })
 
 router.post('/signin', (req, res) => {
-    userModel.findByUsernameAndPassword(req.body.username, req.body.password).then(data => {
+    let user = req.body;
+    userModel.findByUsernameAndPassword(user.username, user.password).then(data => {
         if (data.length > 0) {
             let token = userModel.generateAccessToken({ username: req.body.username })
             res.json({ existed: true, token: token })

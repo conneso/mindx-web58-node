@@ -9,7 +9,7 @@ router.get('/', authenticateToken, (req, res) => {
         res.json({ length: data.length, data: data })
     })
 })
-router.get('/count', (req, res) => {
+router.get('/count', authenticateToken, (req, res) => {
     artistModel.count().then(data => {
         res.json({ count: data })
     })
@@ -46,6 +46,13 @@ router.delete('/deleteById', (req, res) => {
 router.post('/update', (req, res) => {
     artistModel.update(req.body.artist).then(result => {
         res.json(result);
+    })
+})
+
+router.get('/getById', (req, res) => {
+    var id = req.query.id;
+    artistModel.getById(id).then(result => {
+        res.json(result)
     })
 })
 
