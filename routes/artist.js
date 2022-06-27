@@ -33,6 +33,8 @@ router.put('/addNewArtist', (req, res) => {
     var artist = req.body.artist;
     artistModel.addNew(artist).then(data => {
         res.json(data)
+    }).catch(err => {
+        throw err
     });
 })
 //Delete
