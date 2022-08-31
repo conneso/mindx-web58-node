@@ -4162,3 +4162,7 @@
 ::1 - - [27/Jun/2022:15:14:05 +0000] "OPTIONS /api/artists?skip=0&limit=20&orderBy=-year_born HTTP/1.1" 204 0
 ::1 - - [27/Jun/2022:15:14:05 +0000] "GET /api/artists?skip=0&limit=20&orderBy=-year_born HTTP/1.1" 200 2137
 ::1 - - [27/Jun/2022:15:14:05 +0000] "GET /api/artists/count HTTP/1.1" 200 12
+::1 - - [31/Aug/2022:09:48:22 +0000] "POST /api/users/signin HTTP/1.1" 200 194
+::1 - - [31/Aug/2022:09:49:28 +0000] "POST /api/users/signin HTTP/1.1" 200 194
+::1 - - [31/Aug/2022:09:49:46 +0000] "GET /api/users HTTP/1.1" 401 12
+::1 - - [31/Aug/2022:09:49:53 +0000] "GET /api/users HTTP/1.1" 200 2591

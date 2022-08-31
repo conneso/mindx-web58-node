@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router()
 
+const authenticateToken = require('../common/authentication')
 const UserModel = require('../DAL/models/userModel')
 const userModel = new UserModel()
 
-router.get('/', (req, res) => {
+router.get('/', authenticateToken, (req, res) => {
     userModel.getAll(req.query.skip, req.query.limit, req.query.orderBy).then(data => {
         res.json({ length: data.length, data: data })
     })
